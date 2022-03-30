@@ -457,8 +457,9 @@ char *yytext;
 /* cs152-calculator */
 #line 4 "calc.lex"
    /* write your C code here for defination of variables and including headers */
+   int count_int, count_operator, count_parens, count_equal = 0;
 /* some common rules, for example DIGIT */
-#line 462 "calc.c"
+#line 463 "calc.c"
 
 #define INITIAL 0
 
@@ -640,11 +641,11 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 11 "calc.lex"
+#line 12 "calc.lex"
 
    /* specific lexer rules in regex */
 
-#line 648 "calc.c"
+#line 649 "calc.c"
 
 	if ( !(yy_init) )
 		{
@@ -729,50 +730,50 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 14 "calc.lex"
-{printf("EQUAL\n"); }
+#line 15 "calc.lex"
+{printf("EQUAL\n"); count_equal++; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 15 "calc.lex"
-{printf("NUMBER %s\n", yytext); }
+#line 16 "calc.lex"
+{printf("NUMBER %s\n", yytext); count_int++; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 16 "calc.lex"
-{printf("PLUS \n"); }
+#line 17 "calc.lex"
+{printf("PLUS \n"); count_operator++; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 17 "calc.lex"
-{printf("MINUS \n"); }
+#line 18 "calc.lex"
+{printf("MINUS \n"); count_operator++; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 18 "calc.lex"
-{printf("MULT \n"); }
+#line 19 "calc.lex"
+{printf("MULT \n"); count_operator++; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 19 "calc.lex"
-{printf("DIV \n"); }
+#line 20 "calc.lex"
+{printf("DIV \n"); count_operator++; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 20 "calc.lex"
-{printf("L_PAREN \n"); }
+#line 21 "calc.lex"
+{printf("L_PAREN \n"); count_parens++; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 21 "calc.lex"
-{printf("R_PAREN \n"); }
+#line 22 "calc.lex"
+{printf("R_PAREN \n"); count_parens++; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 22 "calc.lex"
+#line 23 "calc.lex"
 ECHO;
 	YY_BREAK
-#line 776 "calc.c"
+#line 777 "calc.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1766,7 +1767,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 22 "calc.lex"
+#line 23 "calc.lex"
 
 
 	/* C functions used in lexer */
@@ -1784,6 +1785,10 @@ int main(int argc, char ** argv)
    } else {
    	yylex();
    }
+   printf("Number of Equals: %d\n", count_equal);
+   printf("Number of Numbers: %d\n", count_int);
+   printf("Number of Operators: %d\n", count_operator);
+   printf("Number of Parentheses: %d\n", count_parens);
 }
 
 
